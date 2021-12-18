@@ -3,6 +3,7 @@ const select = document.getElementById("currency-select")
 
 const dolar = 5.2
 const euro = 5.9
+const bitcoin = 266681.27
 
 const convertValeus = () => {
    const inputReais = document.getElementById("input-real").value
@@ -14,11 +15,11 @@ const convertValeus = () => {
       currency: "BRL",
    }).format(inputReais)
 
-   // Maenira de calcular sem formatar o texto - currencyValueText.innerHTML = inputReais / dolar
+   // Maneira de calcular sem formatar o texto - currencyValueText.innerHTML = inputReais / dolar
    if (select.value === 'US$ Dólar Americano') {
-      currencyValueText.innerHTML = new Intl.NumberFormat("pt-BR", {
+      currencyValueText.innerHTML = new Intl.NumberFormat("en-US", {
          style: "currency",
-         currency: "BRL",
+         currency: "USD",
       }).format(inputReais / dolar)
    }
    if (select.value === '€ Euro') {
@@ -26,6 +27,10 @@ const convertValeus = () => {
       style: "currency",
       currency: "EUR",
    }).format(inputReais / euro)
+   } 
+   
+   if (select.value === 'Bitcoin') { 
+      currencyValueText.innerHTML = (inputReais / bitcoin).toFixed(6)
    }
 }
 
@@ -41,6 +46,11 @@ changeCurrency = () => {
    if (select.value === 'US$ Dólar Americano') {
       currencyName.innerHTML = "Dólar Americano"
       currencyImg.src = "./assets/eua.png"
+   }
+
+   if (select.value === 'Bitcoin') { 
+      currencyName.innerHTML = 'Bitcoin'
+      currencyImg.src = "./assets/bitcoin.png"
    }
    convertValeus()
 }
